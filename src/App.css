@@ -199,15 +199,53 @@
   }
 }
 
-/* Cores semânticas de demonstração.
-   Não representam o mapeamento real dos status da Monday. */
+/* Cores de status de DEMONSTRAÇÃO (mock).
+   PENDENTE: o mapeamento real de status e cores da Monday ainda não foi
+   fornecido. Estes valores são provisórios, não representam as cores da
+   Monday e ficam separados de --brand-blue / --brand-orange (decorativos).
+   Cada par texto/fundo foi escolhido para contraste mínimo de 4,5:1. */
 .widget-layout {
-  --status-success-text: #17603a;
-  --status-success-bg: #e8f5ed;
-  --status-warning-text: #795000;
-  --status-warning-bg: #fff3cd;
-  --status-danger-text: #a32121;
-  --status-danger-bg: #fdecec;
+  --mock-status-done-bg: #1e7a4a;
+  --mock-status-done-text: #ffffff;
+  --mock-status-progress-bg: #1f6f8b;
+  --mock-status-progress-text: #ffffff;
+  --mock-status-attention-bg: #f5c542;
+  --mock-status-attention-text: #3d2a00;
+  --mock-status-idle-bg: #6b7280;
+  --mock-status-idle-text: #ffffff;
+  --mock-status-unknown-bg: #5b4a7a;
+  --mock-status-unknown-bg-alt: #7a68a0;
+  --mock-status-unknown-text: #ffffff;
+}
+
+.mock-status-concluido {
+  background: var(--mock-status-done-bg);
+  color: var(--mock-status-done-text);
+}
+
+.mock-status-andamento {
+  background: var(--mock-status-progress-bg);
+  color: var(--mock-status-progress-text);
+}
+
+.mock-status-atencao {
+  background: var(--mock-status-attention-bg);
+  color: var(--mock-status-attention-text);
+}
+
+.mock-status-nao-iniciado {
+  background: var(--mock-status-idle-bg);
+  color: var(--mock-status-idle-text);
+}
+
+/* Listrado: reforça que "Desconhecido" não é um status mapeado. */
+.mock-status-desconhecido {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--mock-status-unknown-bg) 0 6px,
+    var(--mock-status-unknown-bg-alt) 6px 12px
+  );
+  color: var(--mock-status-unknown-text);
 }
 
 .demo-notice {
@@ -264,19 +302,10 @@
   font-weight: 700;
 }
 
-.status-success {
-  background: var(--status-success-bg);
-  color: var(--status-success-text);
-}
-
-.status-warning {
-  background: var(--status-warning-bg);
-  color: var(--status-warning-text);
-}
-
-.status-danger {
-  background: var(--status-danger-bg);
-  color: var(--status-danger-text);
+/* Indicador de objetivo ativo: usa o azul decorativo, não cor de status. */
+.active-badge {
+  background: var(--brand-blue);
+  color: #ffffff;
 }
 
 .objective-card h2,
@@ -286,48 +315,9 @@
   line-height: 1.4;
 }
 
-.objective-progress {
-  margin-top: auto;
-}
-
-.objective-progress label {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-1);
-  margin-bottom: var(--space-1);
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-}
-
-.objective-progress strong {
-  color: var(--text-primary);
-}
-
-.objective-progress progress {
-  display: block;
-  width: 100%;
-  height: 0.75rem;
-  overflow: hidden;
-  border: 0;
-  border-radius: 999px;
-  background: var(--border);
-  accent-color: var(--brand-blue);
-}
-
-.objective-progress progress::-webkit-progress-bar {
-  background: var(--border);
-  border-radius: 999px;
-}
-
-.objective-progress progress::-webkit-progress-value {
-  background: var(--brand-blue);
-  border-radius: 999px;
-}
-
-.objective-progress progress::-moz-progress-bar {
-  background: var(--brand-blue);
-  border-radius: 999px;
+.objective-card.is-active {
+  border-color: var(--brand-blue);
+  box-shadow: inset 4px 0 0 var(--brand-blue);
 }
 
 .objective-result {
@@ -429,6 +419,197 @@
 .action-status {
   color: var(--text-secondary);
   font-size: 0.875rem;
+}
+
+.navigation-button:disabled {
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Filtro por área */
+.area-filter {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  padding: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.area-filter-field {
+  display: grid;
+  flex: 1 1 220px;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.area-filter-field label {
+  font-weight: 600;
+}
+
+.area-filter-field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.area-filter-status {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.area-filter-status strong {
+  color: var(--text-primary);
+}
+
+/* Distribuição por status */
+.status-distribution {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: auto;
+  min-width: 0;
+}
+
+.status-total,
+.status-empty {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.status-empty {
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+.status-bar {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: 1.75rem;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--border);
+  list-style: none;
+}
+
+.status-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 0;
+  min-width: 1.5rem; /* mantém visível o segmento de 1 item */
+  overflow: hidden;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.status-segment + .status-segment {
+  border-left: 2px solid var(--surface);
+}
+
+.status-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+}
+
+.status-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.legend-label {
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.status-swatch {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.2rem;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.action-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.action-status small {
+  color: var(--text-secondary);
+}
+
+/* Estado vazio e botão de voltar */
+.empty-state {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+
+.empty-state h2 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.empty-state p {
+  margin: 0 0 var(--space-1);
+  color: var(--text-secondary);
+}
+
+.back-button {
+  margin-bottom: var(--space-2);
+}
+
+.detail-card > .objective-card-top + h2 {
+  margin-top: var(--space-1);
+}
+
+@media (max-width: 600px) {
+  .area-filter .navigation-button {
+    flex: 1 1 100%;
+  }
 }
 
 .sr-only {
