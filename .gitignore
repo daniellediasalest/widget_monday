@@ -1,2 +1,5 @@
 
 .mappsrc
+node_modules
+
+build/
