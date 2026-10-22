@@ -719,7 +719,9 @@ export default function App() {
                 actions={getVisibleActions(activeObjective, areaFilter)}
               />
 
-              <h3>Planos de ação</h3>
+              <h3 id={`plans-title-${activeObjective.id}`}>
+                Planos de ação
+              </h3>
 
               {getVisibleActions(activeObjective, areaFilter).length === 0 ? (
                 <p className="status-empty">
@@ -727,33 +729,61 @@ export default function App() {
                   fictício).
                 </p>
               ) : (
-                <ul className="action-list">
-                  {getVisibleActions(activeObjective, areaFilter).map(
-                    (action) => {
-                      const status = resolveStatus(action.status);
+                /* Região com rolagem horizontal acessível: recebe foco por
+                   teclado (tabIndex 0) e é anunciada como região. Nenhuma
+                   linha é escondida; em telas estreitas a tabela rola. */
+                <div
+                  className="plans-table-scroll"
+                  role="region"
+                  aria-labelledby={`plans-title-${activeObjective.id}`}
+                  tabIndex={0}
+                >
+                  <table className="plans-table">
+                    <caption className="sr-only">
+                      Planos de ação fictícios do objetivo{" "}
+                      {activeObjective.title}. Dados de demonstração.
+                    </caption>
 
-                      return (
-                        <li key={action.id}>
-                          <div>
-                            <strong>{action.title}</strong>
-                            <p>{action.owner}</p>
-                          </div>
+                    <thead>
+                      <tr>
+                        <th scope="col">Plano de ação</th>
+                        <th scope="col">Responsável</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
 
-                          <span className="action-status">
-                            <StatusChip status={status} />
-                            {status.key === UNKNOWN_STATUS_KEY && (
-                              <small>
-                                {action.status
-                                  ? `Valor “${action.status}” não mapeado`
-                                  : "Status não informado"}
-                              </small>
-                            )}
-                          </span>
-                        </li>
-                      );
-                    }
-                  )}
-                </ul>
+                    <tbody>
+                      {getVisibleActions(activeObjective, areaFilter).map(
+                        (action) => {
+                          const status = resolveStatus(action.status);
+
+                          return (
+                            <tr key={action.id}>
+                              <th scope="row" className="plan-title-cell">
+                                {action.title}
+                              </th>
+
+                              <td>{action.owner ?? "Não informado"}</td>
+
+                              <td>
+                                <span className="action-status">
+                                  <StatusChip status={status} />
+                                  {status.key === UNKNOWN_STATUS_KEY && (
+                                    <small>
+                                      {action.status
+                                        ? `Valor “${action.status}” não mapeado`
+                                        : "Status não informado"}
+                                    </small>
+                                  )}
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        }
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               )}
             </article>
           </div>

@@ -612,6 +612,75 @@
   }
 }
 
+/* Tabela de planos de ação (tela Detalhes) — dados fictícios (mock).
+   Colunas provisórias: usam apenas campos existentes nos mocks (título,
+   responsável e status). O contrato real da tarefa 03 está pendente. */
+.plans-table-scroll {
+  width: 100%;
+  min-width: 0;
+  /* Rolagem horizontal só quando a tabela não couber; nenhuma linha é
+     escondida. A região recebe foco por teclado para permitir rolar. */
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.plans-table-scroll:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.plans-table {
+  width: 100%;
+  min-width: 36rem; /* garante leitura das 3 colunas; rola se faltar espaço */
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.plans-table caption {
+  text-align: left;
+}
+
+.plans-table th,
+.plans-table td {
+  padding: var(--space-2);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  overflow-wrap: anywhere; /* quebra legível para títulos longos */
+}
+
+.plans-table thead th {
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.plans-table tbody tr:last-child th,
+.plans-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.plans-table th[scope="row"] {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.plan-title-cell {
+  min-width: 14rem;
+}
+
+/* Valores numéricos/curtos alinhados à direita quando a coluna for
+   numérica. Mantido como utilitário para colunas futuras da tarefa 03. */
+.plans-table .numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
