@@ -1,0 +1,694 @@
+.widget-layout {
+  /* Paleta provisória: validar com o material oficial. */
+  --brand-blue: #174580;
+  --brand-orange: #f58220;
+
+  /* Tokens de interface, separados das futuras cores de status. */
+  --surface: #ffffff;
+  --surface-muted: #f4f6f9;
+  --text-primary: #202b3c;
+  --text-secondary: #526176;
+  --border: #d4dce6;
+  --focus-ring: #174580;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --radius: 0.75rem;
+
+  min-height: 100vh;
+  min-width: 0;
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.widget-layout,
+.widget-layout *,
+.widget-layout *::before,
+.widget-layout *::after {
+  box-sizing: border-box;
+}
+
+.widget-layout :focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10;
+  padding: var(--space-1) var(--space-2);
+  background: var(--surface);
+  color: var(--brand-blue);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 4px solid var(--brand-orange);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.widget-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.brand-logo {
+  display: block;
+  width: 260px;
+  max-width: 100%;
+  height: auto;
+}
+
+.brand-placeholder {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--brand-blue);
+  font-weight: 700;
+}
+
+.brand-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.brand-name {
+  color: var(--brand-blue);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.brand-description {
+  margin: 0.125rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.preview-label {
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+}
+
+.widget-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.navigation-button {
+  min-height: 44px;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.navigation-button:hover {
+  background: var(--surface-muted);
+}
+
+.navigation-button[aria-current="page"] {
+  border-color: var(--brand-blue);
+  background: var(--brand-blue);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.widget-main {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: var(--space-4);
+}
+
+.page-heading {
+  margin-bottom: var(--space-3);
+  overflow-wrap: anywhere;
+}
+
+.page-heading h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.25;
+}
+
+.page-heading p {
+  margin: var(--space-1) 0 0;
+  color: var(--text-secondary);
+}
+
+.content-placeholder {
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+
+.content-placeholder h2 {
+  margin: 0 0 var(--space-1);
+  font-size: 1.125rem;
+}
+
+.content-placeholder p {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .widget-header,
+  .widget-navigation,
+  .widget-main {
+    padding: var(--space-2);
+  }
+
+  .navigation-button {
+    flex: 1;
+  }
+}
+
+/* Cores de status de DEMONSTRAÇÃO (mock).
+   PENDENTE: o mapeamento real de status e cores da Monday ainda não foi
+   fornecido. Estes valores são provisórios, não representam as cores da
+   Monday e ficam separados de --brand-blue / --brand-orange (decorativos).
+   Cada par texto/fundo foi escolhido para contraste mínimo de 4,5:1. */
+.widget-layout {
+  --mock-status-done-bg: #1e7a4a;
+  --mock-status-done-text: #ffffff;
+  --mock-status-progress-bg: #1f6f8b;
+  --mock-status-progress-text: #ffffff;
+  --mock-status-attention-bg: #f5c542;
+  --mock-status-attention-text: #3d2a00;
+  --mock-status-idle-bg: #6b7280;
+  --mock-status-idle-text: #ffffff;
+  --mock-status-unknown-bg: #5b4a7a;
+  --mock-status-unknown-bg-alt: #7a68a0;
+  --mock-status-unknown-text: #ffffff;
+}
+
+.mock-status-concluido {
+  background: var(--mock-status-done-bg);
+  color: var(--mock-status-done-text);
+}
+
+.mock-status-andamento {
+  background: var(--mock-status-progress-bg);
+  color: var(--mock-status-progress-text);
+}
+
+.mock-status-atencao {
+  background: var(--mock-status-attention-bg);
+  color: var(--mock-status-attention-text);
+}
+
+.mock-status-nao-iniciado {
+  background: var(--mock-status-idle-bg);
+  color: var(--mock-status-idle-text);
+}
+
+/* Listrado: reforça que "Desconhecido" não é um status mapeado. */
+.mock-status-desconhecido {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--mock-status-unknown-bg) 0 6px,
+    var(--mock-status-unknown-bg-alt) 6px 12px
+  );
+  color: var(--mock-status-unknown-text);
+}
+
+.demo-notice {
+  margin: 0 0 var(--space-3);
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-3);
+}
+
+.objective-card,
+.detail-card {
+  min-width: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+
+.objective-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.objective-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.objective-area {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.status-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+/* Indicador de objetivo ativo: usa o azul decorativo, não cor de status. */
+.active-badge {
+  background: var(--brand-blue);
+  color: #ffffff;
+}
+
+.objective-card h2,
+.detail-card h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.objective-card.is-active {
+  border-color: var(--brand-blue);
+  box-shadow: inset 4px 0 0 var(--brand-blue);
+}
+
+.objective-result {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.objective-details-button {
+  align-self: flex-start;
+  color: var(--brand-blue);
+}
+
+.objective-detail {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.objective-selector {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.objective-selector label {
+  font-weight: 600;
+}
+
+.objective-selector select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.detail-card > h2 {
+  margin-top: var(--space-2);
+}
+
+.detail-card > p {
+  color: var(--text-secondary);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+
+.metrics-grid > div {
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+}
+
+.metrics-grid dt {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.metrics-grid dd {
+  margin: var(--space-1) 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.action-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.action-list li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--border);
+}
+
+.action-list li > div {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.action-list p {
+  margin: 0.25rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.action-status {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.navigation-button:disabled {
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Filtro por área */
+.area-filter {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  padding: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.area-filter-field {
+  display: grid;
+  flex: 1 1 220px;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.area-filter-field label {
+  font-weight: 600;
+}
+
+.area-filter-field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.area-filter-status {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.area-filter-status strong {
+  color: var(--text-primary);
+}
+
+/* Distribuição por status */
+.status-distribution {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: auto;
+  min-width: 0;
+}
+
+.status-total,
+.status-empty {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.status-empty {
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+.status-bar {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: 1.75rem;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--border);
+  list-style: none;
+}
+
+.status-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 0;
+  min-width: 1.5rem; /* mantém visível o segmento de 1 item */
+  overflow: hidden;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.status-segment + .status-segment {
+  border-left: 2px solid var(--surface);
+}
+
+.status-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+}
+
+.status-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.legend-label {
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.status-swatch {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.2rem;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.action-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.action-status small {
+  color: var(--text-secondary);
+}
+
+/* Estado vazio e botão de voltar */
+.empty-state {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+
+.empty-state h2 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.empty-state p {
+  margin: 0 0 var(--space-1);
+  color: var(--text-secondary);
+}
+
+.back-button {
+  margin-bottom: var(--space-2);
+}
+
+.detail-card > .objective-card-top + h2 {
+  margin-top: var(--space-1);
+}
+
+@media (max-width: 600px) {
+  .area-filter .navigation-button {
+    flex: 1 1 100%;
+  }
+}
+
+/* Tabela de planos de ação (tela Detalhes) — dados fictícios (mock).
+   Colunas provisórias: usam apenas campos existentes nos mocks (título,
+   responsável e status). O contrato real da tarefa 03 está pendente. */
+.plans-table-scroll {
+  width: 100%;
+  min-width: 0;
+  /* Rolagem horizontal só quando a tabela não couber; nenhuma linha é
+     escondida. A região recebe foco por teclado para permitir rolar. */
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.plans-table-scroll:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.plans-table {
+  width: 100%;
+  min-width: 36rem; /* garante leitura das 3 colunas; rola se faltar espaço */
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.plans-table caption {
+  text-align: left;
+}
+
+.plans-table th,
+.plans-table td {
+  padding: var(--space-2);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  overflow-wrap: anywhere; /* quebra legível para títulos longos */
+}
+
+.plans-table thead th {
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.plans-table tbody tr:last-child th,
+.plans-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.plans-table th[scope="row"] {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.plan-title-cell {
+  min-width: 14rem;
+}
+
+/* Valores numéricos/curtos alinhados à direita quando a coluna for
+   numérica. Mantido como utilitário para colunas futuras da tarefa 03. */
+.plans-table .numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
